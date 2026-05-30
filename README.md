@@ -2,8 +2,6 @@
 
 A Flutter-based Quran audio player application that allows users to search Surahs and listen to Quran recitations. The application provides audio playback controls, progress tracking, and seeking functionality using a clean and modular architecture.
 
-![Home](assets/prototype/home_page.jpg)
-
 ## Features
 
 * Search Surah by name
@@ -54,8 +52,7 @@ lib/
 │       │
 │       ├── domain/
 │       │   ├── entities/
-│       │   ├── repository/
-│       │   └── usecase/
+│       │   └── repository/
 │       │
 │       └── presentation/
 │           ├── getx/
@@ -82,7 +79,6 @@ Responsible for:
 
 * Business entities
 * Repository contracts
-* Use cases
 
 ### Presentation Layer
 
@@ -94,21 +90,13 @@ Responsible for:
 
 ## Screenshots
 
-### Home Screen
+<p align="center">
+  <img src="assets/prototype/home_page.jpg" width="250"/>
+  <img src="assets/prototype/filter_by_surah.jpg" width="250"/>
+  <img src="assets/prototype/surah_list.jpg" width="250"/>
+</p>
 
-![Home](assets/prototype/home_page.jpg)
-
-### Search Result
-
-![Search](assets/prototype/filter_by_surah.jpg)
-
-### Audio Playback
-
-![Player](assets/prototype/surah_list.jpg)
-
-## Screen Recording
-
-For more detailed documentation, including application screenshots and demo videos, please visit: [gdrive](https://drive.google.com/drive/folders/1B1-dO2pF0x0ZYvtELtlbryHGLXNsgFdX?usp=sharing).
+For more detailed documentation, including application screenshots and demo videos, please visit: [Google Drive](https://drive.google.com/drive/folders/1B1-dO2pF0x0ZYvtELtlbryHGLXNsgFdX?usp=sharing).
 
 ## Getting Started
 
@@ -138,7 +126,3 @@ dio: ^5.9.2
 just_audio: ^0.10.5
 flutter_launcher_icons: ^0.14.4
 ```
-
-## Author
-
-Developed as part of a Flutter Mobile Developer Technical Test.
