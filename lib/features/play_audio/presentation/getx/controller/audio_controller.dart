@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:quran_mobile_app/features/play_audio/domain/entities/surah_detail.dart';
 
 class AudioController extends GetxController {
@@ -37,13 +38,20 @@ class AudioController extends GetxController {
     });
   }
 
-  Future<void> playSurah(SurahDetail surah) async {
+  Future<void> playSurah(SurahDetail surah, String qari) async {
     try {
       currentSurah(surah);
       currentNumber(surah.number);
 
       final sources = surah.ayahs.map((ayah) {
-        return AudioSource.uri(Uri.parse(ayah.audio));
+        return AudioSource.uri(
+          Uri.parse(ayah.audio),
+          tag: MediaItem(
+            id: '${surah.number}-${ayah.number}',
+            title: '${surah.name} ~ ${surah.englishName}',
+            artist: qari,
+          ),
+        );
       }).toList();
 
       await audio.setAudioSources(sources);

@@ -71,16 +71,15 @@ class HomeController extends GetxController {
   }
 
   Future<void> playSurah(int number) async {
-    final detail = await repositories.getSurahDetail(
-      number,
-      selectedQari.value!.identifier,
-    );
+    final qariName = selectedQari.value!.identifier;
+
+    final detail = await repositories.getSurahDetail(number, qariName);
 
     selectedSurah.value = surah.firstWhere(
       (element) => element.number == number,
     );
 
-    await audioController.playSurah(detail);
+    await audioController.playSurah(detail, qariName);
   }
 
   Future<void> playNextSurah() async {

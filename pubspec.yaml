@@ -21,6 +21,7 @@ dependencies:
 
   # Audio player
   just_audio: ^0.10.5
+  just_audio_background: ^0.0.1-beta.17
 
   # Development utility for generating application launcher icons
   flutter_launcher_icons: ^0.14.4
