@@ -1,0 +1,41 @@
+name: quran_mobile_app
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.11.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State management, DI, and navigation
+  get: ^4.7.3
+
+  # Networking and HTTP comunication
+  dio: ^5.9.2
+
+  # Date formatting and date picker
+  intl: ^0.20.2
+
+  # Audio player
+  just_audio: ^0.10.5
+
+  # Development utility for generating application launcher icons
+  flutter_launcher_icons: ^0.14.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  # flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+flutter_launcher_icons:
+  android: true
+  image_path: "assets/image/logo.png"
+
+  adaptive_icon_background: "#000000"
+  adaptive_icon_foreground: "assets/image/logo.png"
