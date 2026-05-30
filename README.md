@@ -115,7 +115,7 @@ For more detailed documentation, including application screenshots and demo vide
 ### Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Sidqii/tilawah-audio-player.git
 ```
 
 ### Install Dependencies
