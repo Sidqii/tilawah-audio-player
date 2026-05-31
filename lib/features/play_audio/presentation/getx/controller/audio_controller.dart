@@ -2,16 +2,27 @@ import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:quran_mobile_app/features/play_audio/domain/entities/surah_detail.dart';
+import 'package:quran_mobile_app/features/play_audio/domain/repositories/quran_repositories.dart';
+import 'package:quran_mobile_app/features/play_audio/presentation/getx/controller/preview_controller.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class AudioController extends GetxController {
+  final QuranRepositories repositories;
+
+  AudioController(this.repositories);
+
+  PreviewController get previewController => Get.find<PreviewController>();
+
   final audio = AudioPlayer();
 
-  final currentAyahIndex = 0.obs;
-  final currentSurah = Rxn<SurahDetail>();
-  final currentNumber = RxInt(0);
+  final playingAyahIndex = 0.obs;
+  final playingSurah = Rxn<SurahDetail>();
 
   final duration = Rxn<Duration>();
   final position = Duration.zero.obs;
+
+  // TODO: pindah ke LirycsController
+  final itemScrollController = ItemScrollController();
 
   final isPlaying = RxBool(false);
 
@@ -21,7 +32,16 @@ class AudioController extends GetxController {
 
     audio.currentIndexStream.listen((index) {
       if (index != null) {
-        currentAyahIndex.value = index;
+        playingAyahIndex.value = index;
+
+        // TODO: pindahkan auto-scroll lyrics ke LyricsController
+        if (itemScrollController.isAttached) {
+          itemScrollController.scrollTo(
+            index: index,
+            alignment: 0.4,
+            duration: const Duration(milliseconds: 500),
+          );
+        }
       }
     });
 
@@ -36,27 +56,30 @@ class AudioController extends GetxController {
     audio.positionStream.listen((pos) {
       position.value = pos;
     });
+
+    audio.playerStateStream.listen((state) {
+      if (state.processingState == ProcessingState.completed) {
+        playNext();
+      }
+    });
   }
 
-  Future<void> playSurah(SurahDetail surah, String qari) async {
+  Future<void> loadSurah(SurahDetail surahDetail, String qari) async {
     try {
-      currentSurah(surah);
-      currentNumber(surah.number);
+      playingSurah(surahDetail);
 
-      final sources = surah.ayahs.map((ayah) {
+      final sources = surahDetail.ayahs.map((ayah) {
         return AudioSource.uri(
           Uri.parse(ayah.audio),
           tag: MediaItem(
-            id: '${surah.number}-${ayah.number}',
-            title: '${surah.name} ~ ${surah.englishName}',
+            id: '${surahDetail.number}-${ayah.number}',
+            title: '${surahDetail.name} ~ ${surahDetail.englishName}',
             artist: qari,
           ),
         );
       }).toList();
 
       await audio.setAudioSources(sources);
-
-      await audio.play();
     } catch (e) {
       print(e);
     }
@@ -64,10 +87,6 @@ class AudioController extends GetxController {
 
   Future<void> pauseSurah() async {
     await audio.pause();
-  }
-
-  Future<void> resumeSurah() async {
-    await audio.play();
   }
 
   Future<void> nextAyah() async {
@@ -80,6 +99,55 @@ class AudioController extends GetxController {
 
   Future<void> seekSurah(Duration position) async {
     await audio.seek(position);
+  }
+
+  Future<void> playSurah(int surahNumber) async {
+    final qariName = previewController.previewQari.value!.identifier;
+
+    final surahDetail = await repositories.getSurahDetail(
+      surahNumber,
+      qariName,
+    );
+
+    final previewSurah = previewController.previewSurah;
+
+    previewSurah.value = previewController.surahList.firstWhere(
+      (surah) => surah.number == surahNumber,
+    );
+
+    await loadSurah(surahDetail, qariName);
+
+    await audio.play();
+  }
+
+  Future<void> playNext() async {
+    final surahList = previewController.surahList;
+
+    if (surahList.isEmpty) {
+      return;
+    }
+
+    final currentSurahNumber = playingSurah.value?.number;
+
+    if (currentSurahNumber == null) {
+      return;
+    }
+
+    final currentSurahIndex = surahList.indexWhere(
+      (item) => item.number == currentSurahNumber,
+    );
+
+    if (currentSurahIndex < 0) {
+      return;
+    }
+
+    if (currentSurahIndex >= surahList.length - 1) {
+      return;
+    }
+
+    final nextSurah = surahList[currentSurahIndex + 1];
+
+    await playSurah(nextSurah.number);
   }
 
   Future<void> togglePlay() async {
@@ -98,7 +166,6 @@ class AudioController extends GetxController {
   @override
   void onClose() {
     audio.dispose();
-
     super.onClose();
   }
 }

@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:quran_mobile_app/features/play_audio/data/datasource/surah_datasource.dart';
+import 'package:quran_mobile_app/features/play_audio/data/datasource/quran_datasource.dart';
 import 'package:quran_mobile_app/features/play_audio/data/model/qari_model.dart';
 import 'package:quran_mobile_app/features/play_audio/data/model/surah_detail_model.dart';
 import 'package:quran_mobile_app/features/play_audio/data/model/surah_model.dart';
 
-class SurahDatasourceImpl implements SurahDatasource {
+class QuranDatasourceImpl implements QuranDatasource {
   final Dio dio;
 
-  SurahDatasourceImpl(this.dio);
+  QuranDatasourceImpl(this.dio);
 
   @override
   Future<List<SurahModel>> fetchSurah() async {

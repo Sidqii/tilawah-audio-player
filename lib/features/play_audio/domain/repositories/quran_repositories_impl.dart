@@ -1,15 +1,17 @@
-import 'package:quran_mobile_app/features/play_audio/data/datasource/surah_datasource.dart';
-import 'package:quran_mobile_app/features/play_audio/data/repositories/surah_repositories.dart';
+import 'package:quran_mobile_app/features/play_audio/data/datasource/quran_datasource.dart';
+import 'package:quran_mobile_app/features/play_audio/domain/repositories/quran_repositories.dart';
 import 'package:quran_mobile_app/features/play_audio/domain/entities/qari.dart';
 import 'package:quran_mobile_app/features/play_audio/domain/entities/surah.dart';
 import 'package:quran_mobile_app/features/play_audio/domain/entities/surah_detail.dart';
 
-class SurahRepositoriesImpl implements SurahRepositories {
-  final SurahDatasource datasource;
+class QuranRepositoriesImpl implements QuranRepositories {
+  final QuranDatasource datasource;
 
-  SurahRepositoriesImpl(this.datasource);
+  QuranRepositoriesImpl(this.datasource);
 
   List<Surah>? _surahCache;
+
+  final Map<String, SurahDetail> _surahDetailCache = {};
 
   List<Qari>? _qariCache;
 
@@ -28,9 +30,19 @@ class SurahRepositoriesImpl implements SurahRepositories {
 
   @override
   Future<SurahDetail> getSurahDetail(int number, String qari) async {
+    final key = '$number-$qari';
+
+    if (_surahDetailCache.containsKey(key)) {
+      return _surahDetailCache[key]!;
+    }
+
     final result = await datasource.fetchSurahDetail(number, qari);
 
-    return result.toEntity();
+    final surahDetail = result.toEntity();
+
+    _surahDetailCache[key] = surahDetail;
+
+    return surahDetail;
   }
 
   @override

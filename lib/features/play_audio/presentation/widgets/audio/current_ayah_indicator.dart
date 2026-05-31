@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quran_mobile_app/features/play_audio/presentation/getx/controller/home_controller.dart';
+import 'package:quran_mobile_app/features/play_audio/presentation/getx/controller/preview_controller.dart';
 
-class CurrentAyahIndicator extends GetView<HomeController> {
+class CurrentAyahIndicator extends GetView<PreviewController> {
   const CurrentAyahIndicator({super.key});
 
   @override
@@ -10,7 +10,7 @@ class CurrentAyahIndicator extends GetView<HomeController> {
     final audio = controller.audioController;
 
     return Obx(() {
-      final index = audio.currentAyahIndex.value;
+      final index = audio.playingAyahIndex.value;
 
       return Center(
         child: Text(

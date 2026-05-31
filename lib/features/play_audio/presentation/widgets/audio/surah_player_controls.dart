@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quran_mobile_app/features/play_audio/presentation/getx/controller/home_controller.dart';
+import 'package:quran_mobile_app/features/play_audio/presentation/getx/controller/preview_controller.dart';
 
-class SurahPlayerControls extends GetView<HomeController> {
+class SurahPlayerControls extends GetView<PreviewController> {
   final int surahNumber;
 
   const SurahPlayerControls({required this.surahNumber, super.key});
@@ -12,7 +12,7 @@ class SurahPlayerControls extends GetView<HomeController> {
     final audio = controller.audioController;
 
     return Obx(() {
-      final current = audio.currentNumber.value;
+      final current = audio.playingSurah.value?.number;
 
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -29,7 +29,7 @@ class SurahPlayerControls extends GetView<HomeController> {
               if (current == surahNumber) {
                 await audio.togglePlay();
               } else {
-                await controller.playSurah(surahNumber);
+                await controller.audioController.playSurah(surahNumber);
               }
             },
 

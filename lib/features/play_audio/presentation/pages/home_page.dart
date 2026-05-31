@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quran_mobile_app/features/play_audio/presentation/widgets/audio_player.dart';
-import 'package:quran_mobile_app/features/play_audio/presentation/widgets/search_result_list.dart';
-import 'package:quran_mobile_app/features/play_audio/presentation/widgets/search_surah_field.dart';
-import 'package:quran_mobile_app/features/play_audio/presentation/widgets/select_qari.dart';
+import 'package:quran_mobile_app/features/play_audio/presentation/widgets/lirycs_view.dart';
+import 'package:quran_mobile_app/features/play_audio/presentation/widgets/filter/select_qari.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -13,22 +12,14 @@ class HomePage extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: const Padding(
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
 
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SearchSurahField(),
-
-              const SizedBox(height: 13),
-
-              Text('  Suara pembaca'),
-
-              const SizedBox(height: 3),
-
               SelectQari(),
 
-              Expanded(child: SearchResultList()),
+              Expanded(child: LirycsView()),
 
               AudioPlayer(),
             ],

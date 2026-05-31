@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quran_mobile_app/app/routes/app_pages.dart';
-import 'package:quran_mobile_app/features/play_audio/presentation/getx/controller/home_controller.dart';
+import 'package:quran_mobile_app/features/play_audio/presentation/getx/controller/preview_controller.dart';
 import 'package:quran_mobile_app/features/play_audio/presentation/widgets/audio/current_ayah_indicator.dart';
 import 'package:quran_mobile_app/features/play_audio/presentation/widgets/audio/surah_info.dart';
 import 'package:quran_mobile_app/features/play_audio/presentation/widgets/audio/surah_player_controls.dart';
 import 'package:quran_mobile_app/features/play_audio/presentation/widgets/audio/surah_progress_slider.dart';
 import 'package:quran_mobile_app/shared/themes/app_color.dart';
 
-class AudioPlayer extends GetView<HomeController> {
+class AudioPlayer extends GetView<PreviewController> {
   const AudioPlayer({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      final surah = controller.selectedSurah.value;
+      final surah = controller.previewSurah.value;
 
       if (surah == null) {
         return const SizedBox.shrink();
@@ -27,7 +27,7 @@ class AudioPlayer extends GetView<HomeController> {
             onTap: () => Get.toNamed(AppRoutes.LIST),
 
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(30, 30, 5, 10),
+              padding: const EdgeInsets.fromLTRB(30, 10, 5, 10),
 
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,

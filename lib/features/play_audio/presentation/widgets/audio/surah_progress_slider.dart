@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quran_mobile_app/features/play_audio/presentation/getx/controller/home_controller.dart';
+import 'package:quran_mobile_app/features/play_audio/presentation/getx/controller/preview_controller.dart';
 import 'package:quran_mobile_app/shared/themes/app_color.dart';
 
-class SurahProgressSlider extends GetView<HomeController> {
+class SurahProgressSlider extends GetView<PreviewController> {
   const SurahProgressSlider({super.key});
 
   @override
