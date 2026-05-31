@@ -123,5 +123,6 @@ flutter run
 get: ^4.7.3
 dio: ^5.9.2
 just_audio: ^0.10.5
+just_audio_background: ^0.0.1-beta.17
 flutter_launcher_icons: ^0.14.4
 ```
