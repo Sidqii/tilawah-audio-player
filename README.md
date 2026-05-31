@@ -47,8 +47,7 @@ lib/
 │   └── play_audio/
 │       ├── data/
 │       │   ├── datasource/
-│       │   ├── model/
-│       │   └── repository/
+│       │   └── model/
 │       │
 │       ├── domain/
 │       │   ├── entities/
@@ -92,7 +91,7 @@ Responsible for:
 
 <p align="center">
   <img src="assets/prototype/home_page.jpg" width="250"/>
-  <img src="assets/prototype/filter_by_surah.jpg" width="250"/>
+  <img src="assets/prototype/on_play_music.jpg" width="250"/>
   <img src="assets/prototype/surah_list.jpg" width="250"/>
 </p>
 
