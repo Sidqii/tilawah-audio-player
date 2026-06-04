@@ -1,7 +1,7 @@
 name: quran_mobile_app
 description: "A new Flutter project."
 publish_to: "none"
-version: 0.1.0+1
+version: 0.1.0+2
 
 environment:
   sdk: ^3.11.5
@@ -37,7 +37,7 @@ flutter:
 
 flutter_launcher_icons:
   android: true
-  image_path: "assets/image/logo.png"
+  image_path: "assets/image/arabic-logo.png"
 
-  adaptive_icon_background: "#000000"
-  adaptive_icon_foreground: "assets/image/logo.png"
+  adaptive_icon_background: "#212121"
+  adaptive_icon_foreground: "assets/image/arabic-logo.png"
