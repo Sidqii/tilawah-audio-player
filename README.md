@@ -95,7 +95,7 @@ Responsible for:
   <img src="assets/prototype/surah_list.jpg" width="250"/>
 </p>
 
-For more detailed documentation, including application screenshots and demo videos, please visit: [Google Drive](https://drive.google.com/drive/folders/1B1-dO2pF0x0ZYvtELtlbryHGLXNsgFdX?usp=sharing).
+For more detailed documentation, including application screenshots and demo videos, please visit: [Google Drive](https://drive.google.com/drive/folders/1dCCFfZ3LDApB66zHpiNYjNUfvFEGWLcg?usp=sharing).
 
 ## Getting Started
 
